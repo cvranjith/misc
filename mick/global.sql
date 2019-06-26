@@ -1,0 +1,84 @@
+SET VERIFY OFF
+SET FEED OFF
+SET PAGES 0
+SET LINE 999
+SPOOL #$%.CVR
+SELECT 'ACCEPT BRANCH CHAR PROMPT '||CHR(39)||'Enter the Branch [Default is "'||HO_BRANCH||'"] ==> '||CHR(39)||' 
+ACCEPT USER CHAR PROMPT '||CHR(39)||'Enter the UserId [Default is "SYSTEM"] ==> '||CHR(39)
+FROM STTM_BANK
+/
+SPOOL OFF
+CL SCR
+UNDEFINE USER
+UNDEFINE BRANCH
+SET SERVEROUT OFF
+PROMPT
+PROMPT
+@#$%.CVR
+DECLARE
+U	VARCHAR2(100) := UPPER('&&USER');
+B	VARCHAR2(3) := UPPER('&&BRANCH');
+BEGIN
+	IF U IS NULL
+	THEN
+		U := 'SYSTEM';
+	END IF;
+	IF B IS NULL
+	THEN
+		SELECT	HO_BRANCH
+		INTO	B
+		FROM	STTMS_BANK;
+	END IF;
+	GLOBAL.PR_INIT(B,U);
+END;
+/
+UNDEFINE G_VAR
+@OUTPUT
+ACCEPT G_VAR CHAR PROMPT 'Do you want value of any Global Var ? <NO|ALL|SPECIFY> [Default is "NO"] ==> '
+SPOOL #$%.CVR
+DECLARE
+G	VARCHAR2(100);
+BEGIN
+	SELECT	UPPER(DECODE(NVL(UPPER('&&G_VAR'),'NO'),'N','N','NO','N','&&G_VAR'))
+	INTO	G
+	FROM	DUAL;
+	IF G = 'ALL' THEN
+		DBMS_OUTPUT.PUT_LINE( 'SET FEED OFF');
+		DBMS_OUTPUT.PUT_LINE( 'SPO #$%M.CVR');
+		DBMS_OUTPUT.PUT_LINE( 'PROMPT');
+		DBMS_OUTPUT.PUT_LINE( 'PROMPT');
+		DBMS_OUTPUT.PUT_LINE( 'select RPAD(''SELECT ''''*      "''||PROCEDURE$||''"'',40)||'' is "''''||GLOBAL.''||PROCEDURE$||''||''''"'''' FROM DUAL;''');
+		DBMS_OUTPUT.PUT_LINE( 'from sys.argument$ a, sys.obj$ b, user_users u where a.obj# = b.obj#');
+		DBMS_OUTPUT.PUT_LINE( 'and b.owner# = u.user_id and  b.name = ''GLOBAL'' and  a.argument is NULL and a.sequence# = 1 and a.pls_type in (''DATE'',''NUMBER'',''VARCHAR2'',''CHAR'')');
+		DBMS_OUTPUT.PUT_LINE( '/' );
+		DBMS_OUTPUT.PUT_LINE( 'PROMPT');
+		DBMS_OUTPUT.PUT_LINE( 'PROMPT');
+		DBMS_OUTPUT.PUT_LINE( 'SPO OFF');
+		DBMS_OUTPUT.PUT_LINE( 'CL SCR');
+		DBMS_OUTPUT.PUT_LINE( '@ #$%M.CVR');
+	ELSIF G = 'N' THEN
+		DBMS_OUTPUT.PUT_LINE('REM');
+	ELSE
+		DBMS_OUTPUT.PUT_LINE('SELECT '||CHR(39)||'"'||G||'" is "'||CHR(39)||'||'||'GLOBAL.'||G||'||'||CHR(39)||'"'||CHR(39)||' "GLOBAL.'||G||'" FROM DUAL;');
+	END IF;
+END;
+/
+SPOOL OFF
+SPOOL #$%1.CVR
+SELECT'PROMPT Enter the Branch [Default is "'||HO_BRANCH||'"] ==> &&BRANCH
+PROMPT Enter the UserId [Default is "SYSTEM"] ==> &&USER
+PROMPT Do you want value of any Global Var ? <NO|ALL|SPECIFY> [Default is "NO"] ==> &&G_VAR'
+FROM STTM_BANK
+/
+SPOOL OFF
+CL SCR
+PROMPT
+PROMPT
+@#$%1.CVR
+@#$%.CVR
+PROMPT
+UNDEFINE USER
+UNDEFINE G_VAR
+UNDEFINE BRANCH
+SET FEED ON
+SET PAGES 100

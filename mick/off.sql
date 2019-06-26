@@ -1,0 +1,9 @@
+set feed off verify off
+DELETE CSTB_DEBUG_USERS
+WHERE USER_ID = UPPER('&&USER')
+/
+COMMIT
+/
+set feed on verify on
+PROMPT DEBUG IS SET OFF FOR &&USER
+UNDEF USER

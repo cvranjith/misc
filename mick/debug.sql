@@ -1,0 +1,29 @@
+UNDEFINE USER
+DELETE LLDDVV
+/
+DECLARE
+omiFd	utl_file.file_type;
+OMIBUF VARCHAR2(1000);
+N NUMBER := 1;
+U VARCHAR2(100) := '&&USER';
+BEGIN
+U := U||'.TXT';
+omiFd := utl_file.fopen ('D:\TMP',U,'r');
+LOOP
+utl_file.get_line(omiFd, omiBuf);
+INSERT INTO LLDDVV VALUES (N,omiBuf);
+N := N+1;
+END LOOP;
+EXCEPTION WHEN OTHERS
+THEN
+	utl_file.fclose(omiFd);
+END;
+/
+SET TRIMSPOOL ON
+SET PAGES 0
+SPOOL C:\TEMP\TMPDBG.LST
+SELECT V FROM LLDDVV ORDER BY N
+/
+UNDEFINE USER
+SPOOL OFF
+ED C:\TEMP\TMPDBG.LST

@@ -1,0 +1,2 @@
+conn UATVNM/UATVNM@UATVNM
+@sho

@@ -1,0 +1,54 @@
+[/] mshkdflcdb01 : SFR @ OD_FC_SG>
+[/] mshkdflcdb01 : SFR @ OD_FC_SG>ed sho
+
+[/] mshkdflcdb01 : SFR @ OD_FC_SG>set colsep " | " pages 1000000 trimspo on line 9999
+SP2-0267: pagesize option 1000000 out of range (0 through 50000)
+[/] mshkdflcdb01 : SFR @ OD_FC_SG>set colsep " | " pages 50000 trimpso on line 9999
+SP2-0158: unknown SET option "trimpso"
+[/] mshkdflcdb01 : SFR @ OD_FC_SG>
+[/] mshkdflcdb01 : SFR @ OD_FC_SG>set colsep " | " pages 50000 trimspo on line 9999
+[/] mshkdflcdb01 : SFR @ OD_FC_SG>select * from sfr.units;
+
+no rows selected
+
+[/] mshkdflcdb01 : SFR @ OD_FC_SG>select * from sfr.params;
+
+no rows selected
+
+[/] mshkdflcdb01 : SFR @ OD_FC_SG>@lock
+
+OBJECT                                                                                     | SESSION_ID | STATUS   | USERNAME                       | OSUSER                         | TERMINAL                       | LOCKED_MODE
+------------------------------------------------------------------------------------------ | ---------- | -------- | ------------------------------ | ------------------------------ | ------------------------------ | -----------
+DBMS_ALERT_INFO                                                                            |         70 | INACTIVE | FLXOSIN                        | oracle                         |                                |           3
+DBMS_ALERT_INFO                                                                            |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+ACTB_DAILY_LOG                                                                             |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+ACTB_POSITION_HANDOFF                                                                      |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+ACTB_VD_BAL                                                                                |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+CSTB_CONTRACT                                                                              |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+CSTB_CONTRACT_EVENT_LOG                                                                    |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+CSTB_MESSAGE_DETAILS                                                                       |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+ICTB_ITM_TOV                                                                               |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+ISTB_MSGHO                                                                                 |         70 | INACTIVE | FLXOSIN                        | oracle                         |                                |           3
+ISTB_MSGHO                                                                                 |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+LCTB_COLLATERAL                                                                            |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+LMTB_LINE_UTILS                                                                            |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+LMTM_LIAB                                                                                  |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+MSTB_ADV_INPUT                                                                             |         70 | INACTIVE | FLXOSIN                        | oracle                         |                                |           3
+MSTB_CONTRACT_CHG_ADVICE                                                                   |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+MSTB_DLY_MSG_OUT                                                                           |         70 | INACTIVE | FLXOSIN                        | oracle                         |                                |           3
+MSTB_DLY_MSG_OUT                                                                           |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+STTM_CUST_ACCOUNT                                                                          |         76 | ACTIVE   | FLXOSIN                        | oracle                         |                                |           3
+
+19 rows selected.
+
+[/] mshkdflcdb01 : SFR @ OD_FC_SG>@proc
+SELECT * FROM STVW_PROC_INFO
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+[/] mshkdflcdb01 : SFR @ OD_FC_SG>l
+  1  SELECT * FROM STVW_PROC_INFO
+  2* WHERE FUNCTION_ID <> 'BRSIGNON'
+[/] mshkdflcdb01 : SFR @ OD_FC_SG>exit

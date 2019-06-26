@@ -1,0 +1,5 @@
+
+cd /home/iflex/ranjith/mick
+#sqlplus flxosin/flxosin @sho
+sqlplus $FLXSCHEMA @sho
+

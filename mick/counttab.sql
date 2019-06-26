@@ -1,0 +1,17 @@
+@storeset
+UNDEF CNT
+ACCEPT CNT CHAR PROMPT 'Enter Count [Table having rows >= this count will be listed] ==> '
+SET TRIMSPOOL ON PAGES 0 LINE 9999 FEED OFF VERIFY OFF TERMOUT OFF
+SPOOL TMP.TMP
+SELECT 'SELECT RPAD('||CHR(39)||TABLE_NAME||CHR(39)||',30), COUNT(1) FROM '||TABLE_NAME||' GROUP BY '
+||CHR(39)||TABLE_NAME||CHR(39)||' HAVING COUNT(1) > &&CNT;'
+FROM USER_TABLES
+/
+SPO OFF
+SET TERMOUT ON
+
+spo /tmp/count.lst
+@TMP.TMP
+spo off
+
+@restoreset

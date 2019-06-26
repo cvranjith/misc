@@ -1,0 +1,38 @@
+UNDEF BRANCH_CODE
+UNDEF CONV_DATE
+SET TRIMSPOOL ON VERIFY OFF LINE 9999 SERVEROUT ON PAGES 0 FEED OFF
+CL SCR
+
+PROMPT
+PROMPT
+ACCEPT BRANCH_CODE CHAR PROMPT 'Enter branch code                                                                           ==> '
+
+
+SPOOL TMP.TMP
+DECLARE
+B VARCHAR2(100) := '&&BRANCH_CODE';
+BEGIN
+	BEGIN
+		SELECT  1
+		INTO	B
+		FROM	STTM_BRANCH
+		WHERE	BRANCH_CODE = B;
+	EXCEPTION
+		WHEN OTHERS
+		THEN
+			B := NULL;
+	END;
+	IF B IS NULL
+	THEN
+		DBMS_OUTPUT.PUT_LINE('PROMPT INVALID BRANCH');
+	ELSE
+		DBMS_OUTPUT.PUT_LINE('@PRE_2');
+	END IF;
+END;
+/
+SPOOL OFF
+CL SCR
+PROMPT
+PROMPT
+PROMPT Enter branch code                                                                           ==> &&BRANCH_CODE
+@TMP.TMP

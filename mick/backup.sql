@@ -1,0 +1,8 @@
+declare
+P_ERRCODE VARCHAR2(1000);
+begin
+global.pr_init('000','SYSTEM');
+wrp_batch.PR_AEODBACKUP(P_ERRCODE , '000', 'SYSTEM','');
+DBMS_OUTPUT.PUT_LINE(P_ERRCODE);
+END;
+/

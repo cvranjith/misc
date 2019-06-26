@@ -1,0 +1,6 @@
+directory=CONV_DMP
+dumpfile=conv_par_jan_%U.dmp
+logfile=conv.exp.log
+INCLUDE=TABLE:"IN (select table_name from t_tmp)"
+CONTENT=DATA_ONLY
+PARALLEL=8

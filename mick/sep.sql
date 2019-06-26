@@ -1,0 +1,20 @@
+
+set serverout on size 1000000
+
+DECLARE
+L_PORT1 VARCHAR2(1000); 
+L_PORT2 VARCHAR2(1000);
+BEGIN
+IF NOT
+lcpkss_adv_misc.fn_sep_string('&STRING',
+l_port1,
+l_port2,
+&LEN)
+THEN
+NULL;
+END IF;
+DBMS_OUTPUT.PUT_LINE(L_PORT1);
+DBMS_OUTPUT.PUT_LINE('**');
+DBMS_OUTPUT.PUT_LINE(L_PORT2);
+END;
+/

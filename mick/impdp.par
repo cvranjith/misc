@@ -1,0 +1,6 @@
+directory=CONV_DMP
+dumpfile=conv_par_%U.dmp
+logfile=conv.imp.log
+REMAP_SCHEMA=FLXOHKG:FLXOSIN
+TABLE_EXISTS_ACTION=APPEND
+PARALLEL=8

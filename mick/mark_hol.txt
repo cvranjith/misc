@@ -1,0 +1,14 @@
+with 
+wd as(select distinct due_date dt from cstb_amount_due where rownum < 100),
+days as (select level dy from dual connect by level < 32),
+all_dts as (select to_date(lpad(to_char(dy),2,'0')||my,'DDMMYYYY') dt from (select distinct to_char(last_day(dt),'DD') ld, to_char(dt,'MMYYYY') my from wd),days where dy<=ld),
+hols as (select dt from all_dts minus select dt from wd)
+select to_char(dt,'YYYY') y, to_char(dt,'MM') m, listagg(w,'') within group (order by dt) w
+from
+(
+select dt,'W' w from wd
+union all
+select dt,'H' from hols
+)
+group by to_char(dt,'YYYY'), to_char(dt,'MM')
+/

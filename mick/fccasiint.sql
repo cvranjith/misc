@@ -1,0 +1,2 @@
+conn FCCASIINT/FCCASIINT@flasi000
+@sho

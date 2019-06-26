@@ -1,0 +1,5 @@
+--prompt select text from dba_source where name = 'IFPKS_EXTRACT_DB_COMMON' and owner = 'FLXT' and type = 'PACKAGE BODY' order by line
+select text from dba_source where name = 'IFPKS_EXTRACT_DB_COMMON' and owner = 'FLXT' and type = 'PACKAGE BODY' order by line
+--prompt /
+/
+--spo off

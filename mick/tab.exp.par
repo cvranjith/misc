@@ -1,0 +1,5 @@
+directory=CONV_DMP
+dumpfile=20120229_conv.dmp
+logfile=conv.exp.log
+INCLUDE=TABLE:"IN (select table_name from t_tmp)"
+CONTENT=DATA_ONLY

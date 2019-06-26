@@ -1,0 +1,7 @@
+SELECT 'drop sequence '||a.sequence_name||';'||'
+CREATE SEQUENCE '||A.SEQUENCE_NAME||' start with '||a.last_number||';'
+FROM USER_SEQUENCES A, USER_SEQUENCES B
+WHERE A.SEQUENCE_NAME = B.SEQUENCE_NAME
+--AND B.SEQUENCE_OWNER = 'FLXS'
+AND A.LAST_NUMBER <> B.LAST_NUMBER
+/

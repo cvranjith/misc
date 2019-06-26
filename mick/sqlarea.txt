@@ -1,0 +1,8 @@
+SELECT  inst_id,sql_id,executions,elapsed_time/executions/1000000, last_load_time,last_active_time, X.PARSING_SCHEMA_NAME , sql_text  ,sql_fulltext
+FROM gv$sqlarea  X
+  WHERE executions > 0
+  --AND last_active_time > SYSDATE-1/6
+  --AND executions > 50
+  AND sql_text LIKE '%CLVW_CLINSTALLMENT%'
+  ORDER BY last_active_time DESC
+/

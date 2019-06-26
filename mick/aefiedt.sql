@@ -1,0 +1,3 @@
+select 'INSTANCE is "'||INSTANCE_NAME ||'"
+HOST is "'|| HOST_NAME||'"' FROM V$INSTANCE
+/

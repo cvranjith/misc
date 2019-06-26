@@ -1,0 +1,2 @@
+SELECT &COL FROM &TAB
+/
